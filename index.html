@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeevithan Muhunthan | Developer Portfolio</title>
+
+  <!-- Google Fonts: Space Grotesk + Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="logo">JM.</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="education.html">Education</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+
+      <!-- ===== HERO ===== -->
+      <section id="home" class="hero-section">
+        <div class="brutal-card bg-yellow hero-card">
+          <div class="sticker-wrap sticker-sax">
+            <button class="sticker" aria-label="Saxophone sticker — my music story">🎷</button>
+            <div class="sticker-blurb brutal-card bg-white">
+              <p>
+                Before I wrote code, I played music. Years of saxophone — jazz
+                band, school ensembles, and plenty of squeaky practice sessions
+                my family heroically endured. Improvising a solo taught me the
+                same thing debugging did: listen carefully, stay patient, and
+                trust that the next note will come.
+              </p>
+            </div>
+          </div>
+          <h1>Hi, I'm Jeevithan Muhunthan! ✌️</h1>
+          <p>
+            I'm a developer who loves building things that live on the internet.
+            Welcome to my corner of the web.
+          </p>
+          <div class="badges">
+            <span class="brutal-card badge bg-pink">Python</span>
+            <span class="brutal-card badge bg-cyan">JavaScript</span>
+            <span class="brutal-card badge bg-lime">HTML5</span>
+            <span class="brutal-card badge bg-orange">CSS3</span>
+            <span class="brutal-card badge bg-purple">React</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== BASKETBALL GAME ===== -->
+      <section id="game" class="game-section">
+        <h2>Shoot Some Hoops</h2>
+        <p class="game-instructions">
+          Grab the ball, drag back like a slingshot, and let go. Every bucket
+          makes the hoop move somewhere new — how long can you keep up?
+        </p>
+        <div class="brutal-card game-card">
+          <div class="sticker-wrap sticker-sixers">
+            <button class="sticker" aria-label="Philadelphia 76ers sticker — my team">🏀 76ers</button>
+            <div class="sticker-blurb brutal-card bg-white">
+              <p>
+                Trust the Process! I'm a die-hard Philadelphia 76ers fan —
+                through the tanking years, the heartbreak playoff exits, and
+                every Joel Embiid masterclass. Being a Sixers fan teaches you
+                patience and loyalty, which turns out to be perfect training
+                for watching long builds compile.
+              </p>
+            </div> 
+          </div>
+          <div id="game-area">
+            <div class="score-chip">Score: <span id="score">0</span> · Best: <span id="best">0</span></div>
+            <div class="hoop-container" id="hoop">
+              <div class="backboard"></div>
+              <div class="rim"></div>
+              <div class="net"></div>
+            </div>
+            <div id="ball">🏀</div>
+            <div id="swish">SWISH!</div>
+          </div>
+          <button class="btn" id="reset-ball">Reset Ball</button>
+        </div>
+      </section>
+
+      <!-- ===== GALLERY ===== -->
+      <section id="gallery" class="gallery-section">
+        <h2>Gallery</h2>
+        <!-- populated by content_loader.js from the SITE_CONTENT.gallery list -->
+        <div class="gallery-grid" id="gallery-grid"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="content_loader.js"></script>
+</body>
+</html>

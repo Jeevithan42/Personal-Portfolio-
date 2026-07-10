@@ -1,0 +1,7 @@
+# Temporary code-transfer text files (companion .txt files for copy-paste workflow)
+*.txt
+
+# OS junk
+Thumbs.db
+.DS_Store
+desktop.ini
