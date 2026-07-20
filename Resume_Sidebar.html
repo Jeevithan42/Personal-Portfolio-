@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeevithan Muhunthan — Resume</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.2;
+      color: #2b2b2b;
+      background: #fff;
+    }
+
+    .page {
+      max-width: 8.5in;
+      margin: 0 auto;
+      background: #fff;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: #1d3a5f;
+      color: #fff;
+      text-align: center;
+      padding: 12px 40px 10px;
+    }
+
+    header h1 {
+      font-size: 22pt;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    header .contact {
+      font-size: 9.5pt;
+      color: #d7e1ee;
+    }
+
+    header .contact span {
+      white-space: nowrap;
+    }
+
+    /* ===== LAYOUT ===== */
+    .columns {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 30%;
+      background: #eef2f6;
+      padding: 14px 18px;
+    }
+
+    .main {
+      width: 70%;
+      padding: 14px 26px;
+    }
+
+    /* ===== HEADINGS ===== */
+    h2 {
+      font-size: 10.5pt;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #1d3a5f;
+      border-bottom: 2px solid #1d3a5f;
+      padding-bottom: 3px;
+      margin-bottom: 5px;
+    }
+
+    section+section h2,
+    .sidebar section+section h2 {
+      margin-top: 8px;
+    }
+
+    /* ===== SIDEBAR CONTENT ===== */
+    .skill {
+      margin-bottom: 3px;
+    }
+
+    .skill .name {
+      display: block;
+      font-weight: 600;
+    }
+
+    .skill .level {
+      display: block;
+      font-size: 8.5pt;
+      font-style: italic;
+      color: #5a6b7d;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 3px;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .sidebar ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #1d3a5f;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .job {
+      margin-bottom: 4px;
+    }
+
+    .job:last-child {
+      margin-bottom: 0;
+    }
+
+    .job .dates {
+      font-size: 8pt;
+      font-style: italic;
+      color: #5a6b7d;
+      margin-bottom: 1px;
+    }
+
+    .job h3 {
+      font-size: 10pt;
+      margin-bottom: 2px;
+    }
+
+    .job ul {
+      margin-left: 16px;
+    }
+
+    .job ul li {
+      margin-bottom: 1px;
+    }
+
+    .edu {
+      margin-bottom: 6px;
+    }
+
+    .edu:last-child {
+      margin-bottom: 0;
+    }
+
+    .edu .dates {
+      font-size: 8.5pt;
+      font-style: italic;
+      color: #5a6b7d;
+    }
+
+    .edu h3 {
+      font-size: 10.5pt;
+    }
+
+    .edu p {
+      font-size: 9.5pt;
+    }
+
+    /* ===== PRINT ===== */
+    @page {
+      size: letter;
+      margin: 0;
+    }
+
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .page {
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <header>
+      <h1>Jeevithan Muhunthan</h1>
+      <div class="contact">
+        <span>Kitchener, Ontario, Canada</span> &nbsp;|&nbsp;
+        <span>226-898-6784</span> &nbsp;|&nbsp;
+        <span>jeevithanmuhu42@gmail.com</span>
+      </div>
+    </header>
+
+    <div class="columns">
+
+      <aside class="sidebar">
+        <section>
+          <h2>Skills</h2>
+          <div class="skill"><span class="name">Teamwork</span></div>
+          <div class="skill"><span class="name">Adaptability</span></div>
+          <div class="skill"><span class="name">Problem Solving</span></div>
+          <div class="skill"><span class="name">Creative Problem Solving</span></div>
+          <div class="skill"><span class="name">Communication</span></div>
+          <div class="skill"><span class="name">Customer Service</span></div>
+          <div class="skill"><span class="name">Mechanical Skills</span></div>
+          <div class="skill"><span class="name">Instructional Skills</span></div>
+        </section>
+
+        <section>
+          <h2>Languages</h2>
+          <div class="skill"><span class="name">English</span><span class="level">Native speaker</span></div>
+          <div class="skill"><span class="name">Tamil</span><span class="level">Native speaker</span></div>
+          <div class="skill"><span class="name">French</span><span class="level">Highly proficient</span></div>
+        </section>
+
+        <section>
+          <h2>Availability</h2>
+          <ul>
+            <li>Weekdays &amp; weekends</li>
+            <li>Open to early and late shifts</li>
+            <li>Available to work holidays</li>
+          </ul>
+        </section>
+      </aside>
+
+      <div class="main">
+        <section>
+          <h2>Profile</h2>
+          <p>
+            Disciplined and adaptable individual with hands-on experience across aviation
+            ground operations, automotive maintenance, and military service. Strong track
+            record of teamwork, reliability, and quick learning in fast-paced, physically
+            demanding environments. Seeking to bring practical technical skills and a
+            strong work ethic to a growth-oriented role.
+          </p>
+        </section>
+
+        <section>
+          <h2>Employment History</h2>
+
+          <div class="job">
+            <div class="dates">Dec 2025 — Present</div>
+            <h3>Reservist, Royal Canadian Armed Forces — 31st Signal Squadron</h3>
+            <ul>
+              <li>Complete military training and operational readiness exercises as part of a part-time reserve unit.
+              </li>
+              <li>Collaborate with fellow reservists to maintain clear communication and coordination during exercises.
+              </li>
+              <li>Participate in community outreach initiatives, strengthening relationships with local organizations.
+              </li>
+              <li>Build discipline, leadership, and teamwork skills through structured military training.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="dates">Jul 2025 — Present</div>
+            <h3>Assistant Mechanic, Mats Auto Sales — 413 Albert Street, Waterloo, ON</h3>
+            <ul>
+              <li>Assist professional mechanics with vehicle diagnostics and repairs, gaining hands-on technical
+                knowledge.</li>
+              <li>Perform routine vehicle maintenance, including oil changes and lighting repairs/replacements.</li>
+              <li>Support senior mechanics with tools, parts organization, and labor on larger repair jobs.</li>
+              <li>Maintain a clean, organized shop environment to support efficient daily operations.</li>
+              <li>Contribute on a full-time (9 a.m.–5 p.m.) basis while continuing to expand automotive repair
+                knowledge.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="dates">May 2025 — Aug 2025</div>
+            <h3>Line Service Technician (Co-op), Chartright Air Group — 29 Jetliner Ct, Breslau, ON</h3>
+            <ul>
+              <li>Supported daily ground operations in a fast-paced aviation environment, assisting customers and ground
+                crew.</li>
+              <li>Maintained cleanliness, organization, and safety standards across hangars and workspaces.</li>
+              <li>Handled physically demanding tasks reliably under time pressure during a full-time (7 a.m.–4 p.m.)
+                term.</li>
+              <li>Gained direct exposure to aviation industry operations and workplace safety protocols.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="dates">Nov 2024 — Mar 2025</div>
+            <h3>Ski Instructor, Chicopee Ski Resort</h3>
+            <ul>
+              <li>Taught skiing fundamentals and technique to students of varying skill levels, adapting lessons to each
+                learner's pace.</li>
+              <li>Prioritized student safety on the hill while building confidence and encouraging progress.</li>
+              <li>Communicated clearly and patiently with students and parents in a fast-paced seasonal environment.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>Relevant Experience</h2>
+
+          <div class="job">
+            <div class="dates">3 years</div>
+            <h3>Student Activities Council</h3>
+          </div>
+
+          <div class="job">
+            <div class="dates">3 years</div>
+            <h3>Music Council</h3>
+          </div>
+
+          <div class="job">
+            <div class="dates">3 years</div>
+            <h3>Robotics Club Executive</h3>
+          </div>
+        </section>
+
+        <section>
+          <h2>Education</h2>
+
+          <div class="edu">
+            <div class="dates">2025 — 2026</div>
+            <h3>Athabasca University (Online)</h3>
+            <p>Single-credit, non-degree course — Calculus 3. Final grade: 80%.</p>
+          </div>
+
+          <div class="edu">
+            <div class="dates">Sept 2023</div>
+            <h3>High School Diploma, Cameron Heights Collegiate Institute</h3>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>
