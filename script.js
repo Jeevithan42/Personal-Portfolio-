@@ -1,7 +1,3 @@
-// ===============================================
-// BRUTAL HOOPS — basketball mini-game + sticker blurbs
-// Jeevithan Muhunthan's Portfolio
-// =====================================================
 
 // ---------- PHYSICS TUNING ----------
 // These five numbers control the whole feel of the game.
@@ -24,9 +20,9 @@ const BOARD_H = 90;   // backboard height
 
 const BALL_R = 22;    // ball radius (ball div is 44px)
 
-// =====================================================
+
 // GAME
-// =====================================================
+
 const area = document.getElementById('game-area');
 if (area) initGame();
 
@@ -80,7 +76,7 @@ function initGame() {
     }
 
     function resetBall() {
-        ball.x = 80;
+        ball.x = W / 2;            // start centered so it's easy to spot
         ball.y = H - BALL_R - 6;
         ball.vx = 0;
         ball.vy = 0;
@@ -88,10 +84,10 @@ function initGame() {
     }
 
     function moveHoop() {
-        const minX = W * 0.42;
+        const minX = W * 0.05;                          // roam almost the full width
         const maxX = W - (HOOP_W + 20) * S;
         const minY = 50;
-        const maxY = Math.max(minY + 10, H - 220);
+        const maxY = Math.max(minY + 10, H * 0.7);      // top down to 70% of the screen
         hoop.x = minX + Math.random() * (maxX - minX);
         hoop.y = minY + Math.random() * (maxY - minY);
         hoopEl.style.left = hoop.x + 'px';
@@ -122,6 +118,54 @@ function initGame() {
                 ball.vx = -Math.abs(ball.vx) * BOUNCE;
             }
         }
+    }
+
+    // ball lands on / bounces off any bordered .brutal-card on the page,
+    // treating each one as a solid rectangular surface
+    const SURFACE_SELECTOR = '.brutal-card';
+
+    function collideSurfaces() {
+        const origin = area.getBoundingClientRect();
+        document.querySelectorAll(SURFACE_SELECTOR).forEach((el) => {
+            const b = el.getBoundingClientRect();
+            const left = b.left - origin.left, right  = b.right  - origin.left;
+            const top  = b.top  - origin.top,  bottom = b.bottom - origin.top;
+
+            // closest point on the card box to the ball's centre
+            const cx = Math.max(left, Math.min(ball.x, right));
+            const cy = Math.max(top,  Math.min(ball.y, bottom));
+            let dx = ball.x - cx, dy = ball.y - cy;
+            let dist = Math.hypot(dx, dy);
+            let nx, ny;
+
+            if (dist > 0.0001) {
+                if (dist >= BALL_R) return;            // not touching this card
+                nx = dx / dist; ny = dy / dist;
+            } else {
+                // ball centre is inside the box — escape through the nearest edge
+                const dl = ball.x - left, dr = right - ball.x;
+                const dt = ball.y - top,  db = bottom - ball.y;
+                const m = Math.min(dl, dr, dt, db);
+                nx = m === dl ? -1 : m === dr ? 1 : 0;
+                ny = m === dt ? -1 : m === db ? 1 : 0;
+                dist = 0;
+            }
+
+            ball.x += nx * (BALL_R - dist);            // push the ball out to the edge
+            ball.y += ny * (BALL_R - dist);
+
+            const vn = ball.vx * nx + ball.vy * ny;    // speed heading into the surface
+            if (vn < 0) {
+                ball.vx -= (1 + BOUNCE) * vn * nx;     // reflect it back out (bounce)
+                ball.vy -= (1 + BOUNCE) * vn * ny;
+            }
+
+            if (ny < -0.7) {                           // sitting on a roughly-flat top
+                ball.vx *= 0.98;                       // rolling friction
+                if (Math.abs(ball.vy) < 1.2) ball.vy = 0; // settle so it rests, not jitters
+                scoredThisFlight = false;
+            }
+        });
     }
 
     // ball bounces off a rim tip like a tiny peg
@@ -252,6 +296,7 @@ function initGame() {
             ball.y += ball.vy;
             collideWalls();
             collideBoard();
+            collideSurfaces();
             const r = rim();
             bounceOffPoint(r.lx, r.y); // left rim tip
             bounceOffPoint(r.rx, r.y); // right rim tip

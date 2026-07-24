@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <rect x="5" y="5" width="590" height="390" fill="#c6f68d" stroke="#111111" stroke-width="6"/>
+  <text x="50%" y="46%" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#111111" text-anchor="middle" dominant-baseline="middle">PROJECT 1</text>
+  <text x="50%" y="62%" font-family="Arial, sans-serif" font-size="21" fill="#333333" text-anchor="middle" dominant-baseline="middle">placeholder — replace me</text>
+</svg>

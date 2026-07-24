@@ -1,8 +1,3 @@
-/* =========================================
-   BRUTAL NOTEBOOK — Design System
-   Jeevithan Muhunthan's Portfolio
-   ========================================= */
-
 /* ===== ROOT VARIABLES ===== */
 :root {
     --bg: #f4f1ea;
@@ -414,14 +409,14 @@ section {
 }
 
 #game-area {
-    position: relative;
-    height: 420px;
-    background-color: #faf9f5;
-    border: var(--border);
+    position: fixed;
+    inset: 0;
+    background-color: transparent;
+    border: none;
     overflow: hidden;
     touch-action: none;
-    /* stops the page scrolling while you aim on mobile */
-    margin-bottom: 1rem;
+    z-index: 50;
+    pointer-events: none;
 }
 
 #ball {
@@ -435,6 +430,7 @@ section {
     user-select: none;
     touch-action: none;
     z-index: 4;
+    pointer-events: auto;
 }
 
 #ball:active {
@@ -646,9 +642,7 @@ section {
         transform: scale(0.8);
     }
 
-    #game-area {
-        height: 340px;
-    }
+
 
     .sticker-blurb {
         width: 230px;
