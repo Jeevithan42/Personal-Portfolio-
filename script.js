@@ -2,11 +2,11 @@
 // ---------- PHYSICS TUNING ----------
 // These five numbers control the whole feel of the game.
 // Tweak them and refresh to experiment:
-const GRAVITY = 0.45;   // downward pull per frame (higher = heavier ball)
+const GRAVITY = 0.40;   // downward pull per frame (higher = heavier ball)
 const BOUNCE = 0.6;    // energy kept after a bounce (0 = dead, 1 = superball)
 const AIR_DRAG = 0.995;  // horizontal air resistance per frame
-const POWER = 0.16;   // how hard the slingshot converts drag distance to speed
-const MAX_SPEED = 24;     // speed cap so shots stay controllable
+const POWER = 0.24;   // how hard the slingshot converts drag distance to speed
+const MAX_SPEED = 42;     // speed cap so shots stay controllable
 
 // ---------- HOOP GEOMETRY ----------
 // These match the sizes in styles.css (.hoop-container and children).
@@ -45,6 +45,8 @@ function initGame() {
     let score = 0;
     let best = Number(localStorage.getItem('jm-hoops-best') || 0);
     let scoredThisFlight = false;
+    let armed = true;          // ball is held at the launch spot, waiting to be shot
+    let restFrames = 0;        // frames the ball has sat still after a shot
     let dragging = false;
     let pointer = { x: 0, y: 0 };
     let prevY = ball.y;
@@ -76,10 +78,12 @@ function initGame() {
     }
 
     function resetBall() {
-        ball.x = W / 2;            // start centered so it's easy to spot
-        ball.y = H - BALL_R - 6;
+        ball.x = W / 2;            // launch spot: centred, lifted off the floor
+        ball.y = H * 0.62;         // so there's room BELOW to pull the slingshot back
         ball.vx = 0;
         ball.vy = 0;
+        armed = true;
+        restFrames = 0;
         scoredThisFlight = false;
     }
 
@@ -269,6 +273,7 @@ function initGame() {
         if (v.sp < 2) return; // too gentle — treat as a cancelled shot
         ball.vx = v.vx;
         ball.vy = v.vy;
+        armed = false;        // released with power — the shot is live
         scoredThisFlight = false;
     });
 
@@ -289,18 +294,32 @@ function initGame() {
     // --- main loop ---
     function step() {
         if (!dragging) {
-            prevY = ball.y;
-            ball.vy += GRAVITY;
-            ball.vx *= AIR_DRAG;
-            ball.x += ball.vx;
-            ball.y += ball.vy;
-            collideWalls();
-            collideBoard();
-            collideSurfaces();
-            const r = rim();
-            bounceOffPoint(r.lx, r.y); // left rim tip
-            bounceOffPoint(r.rx, r.y); // right rim tip
-            checkScore();
+            if (armed) {
+                // held at the launch spot — no gravity until it's shot
+                ball.x = W / 2;
+                ball.y = H * 0.62;
+                ball.vx = 0;
+                ball.vy = 0;
+            } else {
+                prevY = ball.y;
+                ball.vy += GRAVITY;
+                ball.vx *= AIR_DRAG;
+                ball.x += ball.vx;
+                ball.y += ball.vy;
+                collideWalls();
+                collideBoard();
+                collideSurfaces();
+                const r = rim();
+                bounceOffPoint(r.lx, r.y); // left rim tip
+                bounceOffPoint(r.rx, r.y); // right rim tip
+                checkScore();
+                // once the shot settles on the floor, return it to the launch spot
+                if (ball.y >= H - BALL_R - 1 && ball.vy === 0 && Math.abs(ball.vx) < 0.4) {
+                    if (++restFrames > 18) resetBall();
+                } else {
+                    restFrames = 0;
+                }
+            }
         }
         ballEl.style.left = (ball.x - BALL_R) + 'px';
         ballEl.style.top = (ball.y - BALL_R) + 'px';
@@ -336,4 +355,11 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         document.querySelectorAll('.sticker-wrap.open').forEach((w) => w.classList.remove('open'));
     }
+});
+// ---------- experience timeline: click/tap to keep an entry open ----------
+// (hover-expand is pure CSS; this adds tap-to-open for touch devices)
+document.querySelectorAll('.tl-card').forEach((card) => {
+    card.addEventListener('click', () => {
+        card.closest('.tl-entry').classList.toggle('open');
+    });
 });
