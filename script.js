@@ -356,10 +356,3 @@ document.addEventListener('keydown', (e) => {
         document.querySelectorAll('.sticker-wrap.open').forEach((w) => w.classList.remove('open'));
     }
 });
-// ---------- experience timeline: click/tap to keep an entry open ----------
-// (hover-expand is pure CSS; this adds tap-to-open for touch devices)
-document.querySelectorAll('.tl-card').forEach((card) => {
-    card.addEventListener('click', () => {
-        card.closest('.tl-entry').classList.toggle('open');
-    });
-});

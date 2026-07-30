@@ -37,49 +37,25 @@
           <div class="sticker-wrap sticker-sax">
             <button class="sticker" aria-label="Saxophone sticker — my music story">🎷</button>
             <div class="sticker-blurb brutal-card bg-white">
-              <p>
-                Before I wrote code, I played music. Years of saxophone — jazz
-                band, school ensembles, and plenty of squeaky practice sessions
-                my family heroically endured. Improvising a solo taught me the
-                same thing debugging did: listen carefully, stay patient, and
-                trust that the next note will come.
-              </p>
+              <p data-content="home.saxBlurb"></p>
             </div>
           </div>
-          <h1>Hi, I'm Jeevithan Muhunthan! ✌️</h1>
-          <p>
-            I'm a developer who loves building things that live on the internet.
-            Welcome to my corner of the web.
-          </p>
-          <div class="badges">
-            <span class="brutal-card badge bg-pink">Python</span>
-            <span class="brutal-card badge bg-cyan">JavaScript</span>
-            <span class="brutal-card badge bg-lime">HTML5</span>
-            <span class="brutal-card badge bg-orange">CSS3</span>
-            <span class="brutal-card badge bg-purple">React</span>
-          </div>
+          <h1 data-content="home.heroHeading"></h1>
+          <p data-content="home.heroIntro"></p>
+          <div class="badges" id="home-badges"></div>
         </div>
       </section>
 
       <!-- ===== BASKETBALL GAME ===== -->
       <section id="game" class="game-section">
-        <h2>Shoot Some Hoops</h2>
-        <p class="game-instructions">
-          Grab the ball, drag back like a slingshot, and let go. Every bucket
-          makes the hoop move somewhere new — how long can you keep up?
-        </p>
+        <h2 data-content="home.gameHeading"></h2>
+        <p class="game-instructions" data-content="home.gameInstructions"></p>
         <div class="brutal-card game-card">
           <div class="sticker-wrap sticker-sixers">
             <button class="sticker" aria-label="Philadelphia 76ers sticker — my team">🏀 76ers</button>
             <div class="sticker-blurb brutal-card bg-white">
-              <p>
-                Trust the Process! I'm a die-hard Philadelphia 76ers fan —
-                through the tanking years, the heartbreak playoff exits, and
-                every Joel Embiid masterclass. Being a Sixers fan teaches you
-                patience and loyalty, which turns out to be perfect training
-                for watching long builds compile.
-              </p>
-            </div> 
+              <p data-content="home.sixersBlurb"></p>
+            </div>
           </div>
           <div id="game-area">
             <div class="score-chip">Score: <span id="score">0</span> · Best: <span id="best">0</span></div>
@@ -97,8 +73,8 @@
 
       <!-- ===== GALLERY ===== -->
       <section id="gallery" class="gallery-section">
-        <h2>Gallery</h2>
-        <!-- populated by content_loader.js from the SITE_CONTENT.gallery list -->
+        <h2 data-content="home.galleryHeading"></h2>
+        <!-- populated by content_loader.js from site-content.txt's gallery list -->
         <div class="gallery-grid" id="gallery-grid"></div>
       </section>
 
@@ -106,6 +82,7 @@
   </main>
 
   <script src="script.js"></script>
+  <script src="site-content.txt"></script>
   <script src="content_loader.js"></script>
 </body>
 </html>

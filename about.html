@@ -35,33 +35,21 @@
     <main class="main-content">
         <div class="container">
             <section>
-                <h2 class="" section-tittle">About Me</h2>
-                <div class="brutal-card bg-yellow"></div>
-                <p>
-                    I'm Jeevithan, a developer and CS student passionate about building
-                    creative and functional digital experiences. I enjoy blending design
-                    and code.
-                </p>
-                <p>
-                    When I'm not coding, you'll find me playing basketball or listening
-                    to music.
-                </p>
-        </div>
+                <h2 class="section-title" data-content="about.heading"></h2>
+                <div class="brutal-card bg-yellow">
+                    <p data-content="about.paragraph1"></p>
+                    <p data-content="about.paragraph2"></p>
+                </div>
 
-        <div class="brutal-card bg-cyan" style="margin-top: 3rem;">
-            <h3>Fun Facts</h3>
-            <ul style="padding-left: 1.5rem;">
-                <li>Basketball fan (hence the game on the home page!)</li>
-                <li>Fascinated by creative coding and generative art</li>
-                <li>Currently studying Computer Science</li>
-                <li>Love clean brutalist design</li>
-            </ul>
-        </div>
-
-        </section>
+                <div class="brutal-card bg-cyan" style="margin-top: 3rem;">
+                    <h3 data-content="about.factsHeading"></h3>
+                    <ul style="padding-left: 1.5rem;" id="about-facts"></ul>
+                </div>
+            </section>
         </div>
     </main>
     <script src="script.js"></script>
+    <script src="site-content.txt"></script>
     <script src="content_loader.js"></script>
 </body>
 

@@ -1,6 +1,10 @@
 # Temporary code-transfer text files (companion .txt files for copy-paste workflow)
 *.txt
 
+# site-content.txt is the one real, live-loaded file (all editable site
+# copy/data) — keep it tracked despite the *.txt rule above.
+!site-content.txt
+
 # OS junk
 Thumbs.db
 .DS_Store

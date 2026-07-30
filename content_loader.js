@@ -1,51 +1,82 @@
 // =====================================================
-// CONTENT LOADER — dynamic content for the portfolio
+// CONTENT LOADER — renders everything defined in site-content.txt
 // =====================================================
-// Everything the site renders dynamically lives in the
-// SITE_CONTENT object below. Edit this ONE object to change
-// content — no HTML surgery required.
-//
-// Why a JS object instead of a JSON file? A fetch() for JSON
-// is blocked when you open the site directly from disk
-// (file:// + CORS). Plain <img> tags and JS objects work fine.
-
-const SITE_CONTENT = {
-
-    // ---------- GALLERY ----------
-    // 1. Drop image files into assets/images/gallery/
-    // 2. List them here. Each entry becomes a card in the gallery,
-    //    and clicking a card opens the image in a lightbox.
-    // Example:
-    //   { src: 'assets/images/gallery/hoops.jpg', alt: 'Playing basketball' },
-    gallery: [
-        // add your images here
-    ],
-
-    // ---------- TEXT SNIPPETS ----------
-    // Any element with data-content="someKey" gets its text
-    // replaced by the matching value here. Lets you edit copy
-    // in one place. Example:
-    //   HTML: <p data-content="heroTagline"></p>
-    //   here: heroTagline: "I build things for the web.",
-    text: {
-        // heroTagline: "I'm a developer who loves building things that live on the internet.",
-    },
-
-};
-
-// =====================================================
-// RENDERING (you shouldn't need to edit below this line)
-// =====================================================
+// All the actual copy/data lives in site-content.txt (loaded before
+// this file via <script src="site-content.txt">, which sets
+// window.SITE_CONTENT). This file only knows how to render it —
+// edit site-content.txt to change what appears on the site.
 
 document.addEventListener('DOMContentLoaded', () => {
     injectTextSnippets();
     renderGallery();
+    renderBadges();
+    renderFacts();
+    renderSkills();
+    renderEducation();
 });
 
 function injectTextSnippets() {
     document.querySelectorAll('[data-content]').forEach((el) => {
         const value = SITE_CONTENT.text[el.dataset.content];
         if (typeof value === 'string') el.textContent = value;
+    });
+}
+
+// ---------- home: tech badges ----------
+function renderBadges() {
+    const row = document.getElementById('home-badges');
+    if (!row) return;
+    row.innerHTML = '';
+    SITE_CONTENT.badges.forEach((badge) => {
+        const span = document.createElement('span');
+        span.className = 'brutal-card badge bg-' + badge.color;
+        span.textContent = badge.label;
+        row.appendChild(span);
+    });
+}
+
+// ---------- about: fun facts ----------
+function renderFacts() {
+    const list = document.getElementById('about-facts');
+    if (!list) return;
+    list.innerHTML = '';
+    SITE_CONTENT.facts.forEach((fact) => {
+        const li = document.createElement('li');
+        li.textContent = fact;
+        list.appendChild(li);
+    });
+}
+
+// ---------- skills ----------
+function renderSkills() {
+    const grid = document.getElementById('skills-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    SITE_CONTENT.skills.forEach((skill) => {
+        const card = document.createElement('div');
+        card.className = 'brutal-card skill-card bg-' + skill.color;
+        card.innerHTML =
+            '<span class="skill-icon">' + skill.icon + '</span>' +
+            '<span class="skill-name">' + skill.name + '</span>';
+        grid.appendChild(card);
+    });
+}
+
+// ---------- education ----------
+function renderEducation() {
+    const list = document.getElementById('education-list');
+    if (!list) return;
+    list.innerHTML = '';
+    SITE_CONTENT.education.forEach((entry, i) => {
+        const card = document.createElement('div');
+        card.className = 'brutal-card bg-' + entry.color;
+        if (i > 0) card.style.marginTop = '3rem';
+        let html = '<h3>' + entry.degree + '</h3>' +
+            '<p><strong>' + entry.school + '</strong></p>' +
+            '<p>' + entry.dates + '</p>';
+        if (entry.details) html += '<p>' + entry.details + '</p>';
+        card.innerHTML = html;
+        list.appendChild(card);
     });
 }
 

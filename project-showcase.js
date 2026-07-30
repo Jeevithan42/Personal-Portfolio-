@@ -1,114 +1,9 @@
 
 (function () {
       // ---------- data ----------
-      // Edit this array to add/change projects. See the notes at the top
-      // of project_showcase.txt for what each field does.
-      const PROJECT_DATA = [
-            {
-                  id: 'snake-game',
-                  order: 1,
-                  title: 'Snake Game',
-                  emoji: '🐍',
-                  color: 'lime',
-                  category: 'game',
-                  categoryLabel: 'Game',
-                  status: 'complete',
-                  statusLabel: 'Complete',
-                  dateLabel: 'Personal project',
-                  shortDescription:
-                        'A classic Snake game built in Python using Pygame. Navigate the snake, eat food, grow longer.',
-                  longDescription: [
-                        'A classic Snake game built in Python using Pygame. Navigate the snake, eat food, and grow longer while avoiding the walls and your own tail.',
-                        'Built as a from-scratch exercise in game loops, collision detection, and keyboard input handling — the fundamentals that show up in every larger game project.',
-                  ],
-                  techStack: ['Python', 'Pygame'],
-                  sourceUrl: null,
-                  demoUrl: null,
-                  video: null,
-                  videoNote: 'No walkthrough recorded yet — check back soon.',
-                  photos: [
-                        { label: 'Gameplay', color: 'lime' },
-                        { label: 'Game Over Screen', color: 'yellow' },
-                        { label: 'Score Display', color: 'cyan' },
-                  ],
-            },
-            {
-                  id: 'portfolio-website',
-                  order: 2,
-                  title: 'Portfolio Website',
-                  emoji: '📓',
-                  color: 'pink',
-                  category: 'web',
-                  categoryLabel: 'Web',
-                  status: 'complete',
-                  statusLabel: 'Complete',
-                  dateLabel: 'Personal project',
-                  shortDescription:
-                        'This portfolio site! Built with pure HTML, CSS, and JavaScript. Features a basketball mini-game.',
-                  longDescription: [
-                        'This portfolio site! Built from scratch with plain HTML, CSS, and JavaScript — no framework, no build step.',
-                        'Includes a notebook-paper visual theme, a physics-based basketball mini-game, an interactive photo gallery, and this very project showcase.',
-                  ],
-                  techStack: ['HTML', 'CSS', 'JavaScript'],
-                  sourceUrl: null,
-                  demoUrl: null,
-                  video: null,
-                  videoNote: 'No walkthrough recorded yet — check back soon.',
-                  photos: [
-                        { label: 'Home Page', color: 'pink' },
-                        { label: 'Basketball Game', color: 'orange' },
-                        { label: 'Gallery Page', color: 'purple' },
-                  ],
-            },
-            {
-                  id: 'cli-portfolio-maker',
-                  order: 3,
-                  title: 'CLI Portfolio Maker',
-                  emoji: '⌨️',
-                  color: 'cyan',
-                  category: 'tool',
-                  categoryLabel: 'Tool',
-                  status: 'complete',
-                  statusLabel: 'Complete',
-                  dateLabel: 'Personal project',
-                  shortDescription: 'A command-line tool to scaffold portfolio websites quickly.',
-                  longDescription: [
-                        'A command-line tool to scaffold portfolio websites quickly — answer a few prompts and get a ready-to-edit site.',
-                        'Built to remove the repetitive setup work every new portfolio project starts with.',
-                  ],
-                  techStack: ['Python', 'CLI'],
-                  sourceUrl: null,
-                  demoUrl: null,
-                  video: null,
-                  videoNote: 'No walkthrough recorded yet — check back soon.',
-                  photos: [
-                        { label: 'Terminal Prompt', color: 'cyan' },
-                        { label: 'Generated Site', color: 'lime' },
-                  ],
-            },
-            {
-                  id: 'coming-soon',
-                  order: 4,
-                  title: 'Placeholder Project',
-                  emoji: '🚧',
-                  color: 'orange',
-                  category: 'misc',
-                  categoryLabel: 'Misc',
-                  status: 'planned',
-                  statusLabel: 'Planned',
-                  dateLabel: 'Coming soon',
-                  shortDescription: 'Coming soon. Working on something cool.',
-                  longDescription: [
-                        'Coming soon. Working on something cool — details land here once the project is further along.',
-                  ],
-                  techStack: [],
-                  sourceUrl: null,
-                  demoUrl: null,
-                  video: null,
-                  videoNote: 'Nothing to show yet.',
-                  photos: [],
-            },
-      ];
+      // project data lives in site-content.txt (window.SITE_CONTENT.projects) —
+      // edit that file to add/change projects.
+      const PROJECT_DATA = (window.SITE_CONTENT && window.SITE_CONTENT.projects) || [];
 
       // ---------- tiny utilities ----------
 
@@ -191,102 +86,6 @@
             return { show };
       })();
 
-      // ---------- confetti (pure decoration) ----------
-      const Confetti = (function () {
-            const COLORS = ['#e0c3c4', '#b5c7cd', '#c7d1ab', '#dfbfa8', '#c9bbc9', '#eaddb6'];
-            function burst(x, y) {
-                  const layer = document.createElement('div');
-                  layer.className = 'ps-confetti-layer';
-                  document.body.appendChild(layer);
-                  const count = 22;
-                  for (let i = 0; i < count; i++) {
-                        const piece = document.createElement('span');
-                        piece.className = 'ps-confetti-piece';
-                        const angle = seeded(i * 3.3) * Math.PI * 2;
-                        const dist = 80 + seeded(i * 5.7) * 140;
-                        piece.style.left = x + 'px';
-                        piece.style.top = y + 'px';
-                        piece.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
-                        piece.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
-                        piece.style.setProperty('--rot', Math.floor(seeded(i * 9.1) * 720 - 360) + 'deg');
-                        piece.style.setProperty('--delay', (seeded(i * 1.9) * 0.15).toFixed(2) + 's');
-                        piece.style.backgroundColor = COLORS[i % COLORS.length];
-                        layer.appendChild(piece);
-                  }
-                  setTimeout(() => layer.remove(), 1300);
-            }
-            return { burst };
-      })();
-
-      // ---------- activity log ----------
-      // Keeps an in-memory (not persisted) list of the last 30 things you
-      // did on this page — searches, filters, favorites, project opens.
-      // Purely a transparency/fun panel; nothing reads this data back and
-      // nothing is sent anywhere.
-      const ActivityLog = (function () {
-            const entries = [];
-            function log(message) {
-                  entries.unshift({ message, time: new Date() });
-                  if (entries.length > 30) entries.length = 30;
-                  renderActivityPanel();
-            }
-            function clear() {
-                  entries.length = 0;
-                  renderActivityPanel();
-            }
-            function all() {
-                  return entries;
-            }
-            return { log, clear, all };
-      })();
-
-      let activityPanelEl = null;
-
-      function buildActivityPanel() {
-            activityPanelEl = document.createElement('div');
-            activityPanelEl.className = 'ps-activity-panel';
-            activityPanelEl.innerHTML =
-                  '<div class="ps-activity-header">' +
-                  '<strong>Activity Log</strong>' +
-                  '<div>' +
-                  '<button type="button" class="ps-icon-btn ps-activity-clear" title="Clear log">🗑</button>' +
-                  '<button type="button" class="ps-icon-btn ps-activity-close" title="Close">✕</button>' +
-                  '</div></div>' +
-                  '<ul class="ps-activity-list"></ul>';
-            activityPanelEl
-                  .querySelector('.ps-activity-clear')
-                  .addEventListener('click', () => ActivityLog.clear());
-            activityPanelEl
-                  .querySelector('.ps-activity-close')
-                  .addEventListener('click', toggleActivityPanel);
-            document.body.appendChild(activityPanelEl);
-      }
-
-      // Redraws the log list. Called every time an entry is added, and
-      // whenever the panel is (re)opened.
-      function renderActivityPanel() {
-            if (!activityPanelEl) return;
-            const list = activityPanelEl.querySelector('.ps-activity-list');
-            list.innerHTML = '';
-            ActivityLog.all().forEach((entry) => {
-                  const li = document.createElement('li');
-                  li.textContent = entry.time.toLocaleTimeString() + ' — ' + entry.message;
-                  list.appendChild(li);
-            });
-            if (!ActivityLog.all().length) {
-                  const li = document.createElement('li');
-                  li.className = 'ps-activity-empty';
-                  li.textContent = 'Nothing logged yet — browse around.';
-                  list.appendChild(li);
-            }
-      }
-
-      function toggleActivityPanel() {
-            if (!activityPanelEl) buildActivityPanel();
-            activityPanelEl.classList.toggle('ps-open');
-            if (activityPanelEl.classList.contains('ps-open')) renderActivityPanel();
-      }
-
       // ---------- shared state ----------
       let toolbarState = {
             query: '',
@@ -327,14 +126,8 @@
             grid.className = 'ps-grid';
             mount.appendChild(grid);
 
-            renderSkeleton(grid);
             renderToolbar(toolbar);
-
-            // artificial delay so the skeleton shimmer is visible — the data
-            // is already in memory, there's nothing real to wait for
-            setTimeout(() => {
-                  renderGrid(grid);
-            }, 400);
+            renderGrid(grid);
 
             EventBus.on('showcase:changed', () => {
                   renderGrid(grid);
@@ -344,22 +137,6 @@
             document.addEventListener('keydown', handleGlobalKeydown);
 
             handleDeepLink();
-            maybeRunSmokeTests();
-      }
-
-      // ---------- skeleton loader ----------
-      function renderSkeleton(grid) {
-            grid.innerHTML = '';
-            for (let i = 0; i < 4; i++) {
-                  const card = document.createElement('div');
-                  card.className = 'ps-card ps-skeleton';
-                  card.innerHTML =
-                        '<div class="ps-skeleton-thumb"></div>' +
-                        '<div class="ps-skeleton-line ps-skeleton-line-wide"></div>' +
-                        '<div class="ps-skeleton-line"></div>' +
-                        '<div class="ps-skeleton-line ps-skeleton-line-short"></div>';
-                  grid.appendChild(card);
-            }
       }
 
       // ---------- toolbar ----------
@@ -376,7 +153,6 @@
             searchInput.value = toolbarState.query;
             const debouncedSearch = debounce((value) => {
                   toolbarState.query = value;
-                  if (value) ActivityLog.log('Searched for "' + value + '"');
                   EventBus.emit('showcase:changed');
             }, 200);
             searchInput.addEventListener('input', (e) => debouncedSearch(e.target.value));
@@ -394,7 +170,6 @@
                   chip.addEventListener('click', () => {
                         toolbarState.category = cat;
                         persistPrefs();
-                        ActivityLog.log('Filtered to category: ' + (cat === 'all' ? 'All' : labelForCategory(cat)));
                         renderToolbar(toolbar);
                         EventBus.emit('showcase:changed');
                   });
@@ -409,9 +184,6 @@
             favChip.addEventListener('click', () => {
                   toolbarState.favoritesOnly = !toolbarState.favoritesOnly;
                   persistPrefs();
-                  ActivityLog.log(
-                        toolbarState.favoritesOnly ? 'Enabled favorites-only filter' : 'Disabled favorites-only filter'
-                  );
                   renderToolbar(toolbar);
                   EventBus.emit('showcase:changed');
             });
@@ -437,7 +209,6 @@
             sortSelect.addEventListener('change', (e) => {
                   toolbarState.sort = e.target.value;
                   persistPrefs();
-                  ActivityLog.log('Sorted by: ' + e.target.selectedOptions[0].textContent);
                   EventBus.emit('showcase:changed');
             });
             controlsRow.appendChild(sortSelect);
@@ -459,7 +230,6 @@
             viewToggleBtn.addEventListener('click', () => {
                   toolbarState.viewMode = toolbarState.viewMode === 'list' ? 'grid' : 'list';
                   persistPrefs();
-                  ActivityLog.log('Switched to ' + toolbarState.viewMode + ' view');
                   renderToolbar(toolbar);
                   EventBus.emit('showcase:changed');
             });
@@ -495,15 +265,6 @@
             importInput.addEventListener('change', (e) => importFavoritesFromFile(e, toolbar));
             importLabel.appendChild(importInput);
             controlsRow.appendChild(importLabel);
-
-            // purely-for-fun activity log — see the ActivityLog module
-            const logBtn = document.createElement('button');
-            logBtn.type = 'button';
-            logBtn.className = 'ps-help-btn';
-            logBtn.textContent = '📜';
-            logBtn.title = 'Activity log (press l)';
-            logBtn.addEventListener('click', toggleActivityPanel);
-            controlsRow.appendChild(logBtn);
 
             toolbar.appendChild(controlsRow);
 
@@ -562,7 +323,6 @@
             const pick = pool[Math.floor(Math.random() * pool.length)];
             openModal(pick, document.querySelector('.ps-toolbar .ps-help-btn'));
             Toast.show('Feeling lucky: ' + pick.title);
-            ActivityLog.log('Rolled the dice and got: ' + pick.title);
       }
 
       // ---------- favorites export / import ----------
@@ -585,7 +345,6 @@
             a.click();
             URL.revokeObjectURL(url);
             Toast.show('Favorites exported', 'success');
-            ActivityLog.log('Exported ' + favoriteProjects.length + ' favorite(s)');
       }
 
       function importFavoritesFromFile(e, toolbar) {
@@ -599,7 +358,6 @@
                         const validIds = ids.filter((id) => PROJECT_DATA.some((p) => p.id === id));
                         Storage.set('favorites', validIds);
                         Toast.show('Imported ' + validIds.length + ' favorite(s)', 'success');
-                        ActivityLog.log('Imported ' + validIds.length + ' favorite(s) from a file');
                         EventBus.emit('showcase:changed');
                   } catch (err) {
                         Toast.show('That file did not look like a favorites export');
@@ -796,11 +554,9 @@
             if (idx === -1) {
                   favorites.push(id);
                   Toast.show('Added to favorites', 'success');
-                  ActivityLog.log('Favorited: ' + id);
             } else {
                   favorites.splice(idx, 1);
                   Toast.show('Removed from favorites');
-                  ActivityLog.log('Unfavorited: ' + id);
             }
             Storage.set('favorites', favorites);
             EventBus.emit('showcase:changed');
@@ -817,7 +573,6 @@
                   '<div class="ps-modal-actions">' +
                   '<button type="button" class="ps-icon-btn ps-modal-fav" title="Toggle favorite">☆</button>' +
                   '<button type="button" class="ps-icon-btn ps-modal-share" title="Copy share link">🔗</button>' +
-                  '<button type="button" class="ps-icon-btn ps-modal-print" title="Print this project">🖨</button>' +
                   '<button type="button" class="ps-icon-btn ps-modal-close" title="Close">✕</button>' +
                   '</div></div>' +
                   '<div class="ps-tab-bar">' +
@@ -840,7 +595,6 @@
             modalEl
                   .querySelector('.ps-modal-share')
                   .addEventListener('click', () => copyShareLink(modalState.project));
-            modalEl.querySelector('.ps-modal-print').addEventListener('click', () => printProject());
             modalEl.querySelector('.ps-modal-fav').addEventListener('click', () => {
                   toggleFavorite(modalState.project.id);
                   syncModalFavIcon();
@@ -872,7 +626,6 @@
 
             const views = incrementViews(project.id);
             trackRecentView(project.id);
-            ActivityLog.log('Opened project: ' + project.title);
             modalEl.querySelector('.ps-modal-views').textContent =
                   'Viewed ' + views + ' time' + (views === 1 ? '' : 's') + ' on this device.';
 
@@ -883,8 +636,6 @@
             if (history.replaceState) {
                   history.replaceState(null, '', location.pathname + location.search + '#project=' + project.id);
             }
-
-            maybeCelebrate(project);
       }
 
       function closeModal() {
@@ -1134,19 +885,7 @@
             return current;
       }
 
-      // ---------- confetti trigger ----------
-      function maybeCelebrate(project) {
-            if (project.status !== 'complete') return;
-            const seen = Storage.get('celebrated', []);
-            if (seen.includes(project.id)) return;
-            seen.push(project.id);
-            Storage.set('celebrated', seen);
-
-            const rect = modalEl.querySelector('.ps-modal').getBoundingClientRect();
-            Confetti.burst(rect.left + rect.width / 2, rect.top + 80);
-      }
-
-      // ---------- share / print ----------
+      // ---------- share ----------
       function copyShareLink(project) {
             const url = location.origin + location.pathname + '#project=' + project.id;
             if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1175,12 +914,6 @@
             temp.remove();
       }
 
-      function printProject() {
-            document.body.classList.add('ps-printing');
-            window.print();
-            setTimeout(() => document.body.classList.remove('ps-printing'), 500);
-      }
-
       // ---------- deep link ----------
       function handleDeepLink() {
             const match = location.hash.match(/project=([\w-]+)/);
@@ -1202,7 +935,6 @@
                   '<ul class="ps-shortcuts-list">' +
                   '<li><kbd>/</kbd><span>Focus the search box</span></li>' +
                   '<li><kbd>f</kbd><span>Toggle the favorites-only filter</span></li>' +
-                  '<li><kbd>l</kbd><span>Toggle the activity log panel</span></li>' +
                   '<li><kbd>?</kbd><span>Show this help dialog</span></li>' +
                   '<li><kbd>Esc</kbd><span>Close any open dialog</span></li>' +
                   '<li><kbd>←</kbd><kbd>→</kbd><span>Browse photos in an open project</span></li>' +
@@ -1259,68 +991,7 @@
                   if (toolbar) renderToolbar(toolbar);
             } else if (e.key === '?') {
                   openShortcuts();
-            } else if (e.key === 'l') {
-                  toggleActivityPanel();
             }
-      }
-
-      // ---------- debug-only smoke tests ----------
-      // Visit projects.html?debug to run these. They check nothing that
-      // matters in normal use — they're here purely as an inert sanity
-      // check you can opt into, and do nothing otherwise.
-      function maybeRunSmokeTests() {
-            if (!location.search.includes('debug')) return;
-            const results = [];
-
-            results.push(['seeded() is deterministic', seeded(42) === seeded(42)]);
-
-            Storage.set('smoke-test-key', { a: 1 });
-            results.push(['Storage round-trips a value', Storage.get('smoke-test-key', null).a === 1]);
-            Storage.set('smoke-test-key', undefined);
-
-            let busFired = false;
-            const handler = () => {
-                  busFired = true;
-            };
-            EventBus.on('smoke-test-event', handler);
-            EventBus.emit('smoke-test-event');
-            EventBus.off('smoke-test-event', handler);
-            results.push(['EventBus delivers events', busFired]);
-
-            EventBus.emit('smoke-test-event'); // handler was removed — should be a no-op
-            results.push(['EventBus.off() actually detaches the handler', busFired === true]);
-
-            results.push(['labelForCategory falls back to the raw key for unknown categories', labelForCategory('not-a-real-category') === 'not-a-real-category']);
-
-            results.push(['labelForCategory resolves a known category', labelForCategory('game') === 'Game']);
-
-            const disabledBtn = buildLinkButton('Source', null, 'Source Coming Soon');
-            results.push(['buildLinkButton disables when no URL is given', disabledBtn.disabled === true]);
-
-            const enabledBtn = buildLinkButton('Source', 'https://example.com', 'Source Coming Soon');
-            results.push(['buildLinkButton renders a real link when a URL is given', enabledBtn.tagName === 'A']);
-
-            const savedState = Object.assign({}, toolbarState);
-            toolbarState = Object.assign({}, toolbarState, { category: 'all', favoritesOnly: false, query: '' });
-            results.push(['getFilteredSorted returns every project with no filters active', getFilteredSorted().length === PROJECT_DATA.length]);
-            toolbarState = savedState;
-
-            const debounceLog = [];
-            const debounced = debounce((v) => debounceLog.push(v), 10);
-            debounced('a');
-            debounced('b');
-            setTimeout(() => {
-                  console.log(
-                        (debounceLog.length === 1 && debounceLog[0] === 'b' ? 'PASS' : 'FAIL') +
-                        ' — debounce() drops superseded calls and keeps only the latest'
-                  );
-            }, 30);
-
-            console.group('Project Showcase smoke tests');
-            results.forEach(([name, passed]) => {
-                  console[passed ? 'log' : 'error']((passed ? 'PASS' : 'FAIL') + ' — ' + name);
-            });
-            console.groupEnd();
       }
 
       // ---------- styles ----------
@@ -1629,32 +1300,6 @@
         padding: 2rem;
       }
 
-      /* ===== SKELETON ===== */
-      .ps-skeleton { cursor: default; }
-
-      .ps-skeleton-thumb {
-        height: 160px;
-        background: linear-gradient(100deg, #e9e6dc 30%, #f4f1ea 50%, #e9e6dc 70%);
-        background-size: 200% 100%;
-        animation: ps-shimmer 1.4s infinite;
-      }
-
-      .ps-skeleton-line {
-        height: 12px;
-        margin: 1rem 1.3rem 0;
-        background: linear-gradient(100deg, #e9e6dc 30%, #f4f1ea 50%, #e9e6dc 70%);
-        background-size: 200% 100%;
-        animation: ps-shimmer 1.4s infinite;
-      }
-
-      .ps-skeleton-line-wide { width: 70%; }
-      .ps-skeleton-line-short { width: 40%; margin-bottom: 1.3rem; }
-
-      @keyframes ps-shimmer {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
-      }
-
       /* ===== MODAL ===== */
       .ps-modal-backdrop {
         position: fixed;
@@ -1907,87 +1552,6 @@
       .ps-toast-out { opacity: 0; transform: translateX(20px); }
       .ps-toast-success { background-color: #c7d1ab; }
 
-      /* ===== CONFETTI ===== */
-      .ps-confetti-layer {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 1300;
-      }
-
-      .ps-confetti-piece {
-        position: absolute;
-        width: 8px;
-        height: 8px;
-        animation: ps-confetti-fall 1.1s ease-out forwards;
-        animation-delay: var(--delay, 0s);
-      }
-
-      @keyframes ps-confetti-fall {
-        0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
-        100% { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)); opacity: 0; }
-      }
-
-      /* ===== ACTIVITY LOG PANEL ===== */
-      .ps-activity-panel {
-        position: fixed;
-        bottom: 1.5rem;
-        left: 1.5rem;
-        width: min(320px, calc(100vw - 3rem));
-        max-height: 60vh;
-        display: flex;
-        flex-direction: column;
-        background-color: #faf9f5;
-        border: var(--border);
-        box-shadow: var(--shadow);
-        transform: translateY(20px);
-        opacity: 0;
-        pointer-events: none;
-        transition: transform 0.2s ease, opacity 0.2s ease;
-        z-index: 1150;
-      }
-
-      .ps-activity-panel.ps-open {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .ps-activity-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.7rem 0.9rem;
-        border-bottom: 2px solid var(--text);
-      }
-
-      .ps-activity-header .ps-icon-btn {
-        width: 28px;
-        height: 28px;
-        font-size: 0.85rem;
-        margin-left: 0.4rem;
-      }
-
-      .ps-activity-list {
-        list-style: none;
-        overflow-y: auto;
-        padding: 0.6rem 0.9rem;
-      }
-
-      .ps-activity-list li {
-        font-size: 0.78rem;
-        line-height: 1.4;
-        padding: 0.3rem 0;
-        border-bottom: 1px solid rgba(54,52,46,0.12);
-      }
-
-      .ps-activity-list li:last-child { border-bottom: none; }
-
-      .ps-activity-empty {
-        font-style: italic;
-        color: #5a6b7d;
-      }
-
       /* ===== SHORTCUTS DIALOG ===== */
       .ps-shortcuts {
         width: min(420px, 100%);
@@ -2013,16 +1577,6 @@
         padding: 0.15rem 0.5rem;
         border: 2px solid var(--text);
         background-color: #ffffff;
-      }
-
-      /* ===== PRINT ===== */
-      @media print {
-        body.ps-printing > *:not(.ps-modal-backdrop) { display: none !important; }
-        body.ps-printing .ps-modal-backdrop { position: static; background: none; padding: 0; }
-        body.ps-printing .ps-modal { box-shadow: none; max-height: none; overflow: visible; }
-        body.ps-printing .ps-modal-actions,
-        body.ps-printing .ps-tab-bar { display: none; }
-        body.ps-printing .ps-panel { display: block !important; margin-bottom: 1.5rem; }
       }
 
       /* ===== MOBILE ===== */
