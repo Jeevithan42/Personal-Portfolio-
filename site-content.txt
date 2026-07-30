@@ -1,15 +1,7 @@
 // =====================================================
 // SITE CONTENT — every piece of editable text/data on the
-// site lives in this ONE file. Change something here, save,
-// reload the page — no HTML/JS hunting required.
-//
-// This is a plain text file (not a real .js file) so you can
-// open and edit it in Notepad, but it's still loaded with a
-// <script> tag, which is why it starts with `window.SITE_CONTENT
-// = {` and uses JavaScript object syntax below. Keep that syntax
-// intact (quotes around text, commas between entries) or the
-// site will stop loading.
-// =====================================================
+// site lives in this ONE file. 
+
 
 window.SITE_CONTENT = {
 
@@ -17,17 +9,17 @@ window.SITE_CONTENT = {
     // Any element with data-content="someKey" on the page gets its
     // text replaced by the matching value here.
     text: {
-        'home.heroHeading': "Hi, I'm Jeevithan Muhunthan! ✌️",
-        'home.heroIntro': "I'm a developer who loves building things that live on the internet. Welcome to my corner of the web.",
-        'home.saxBlurb': "Before I wrote code, I played music. Years of saxophone — jazz band, school ensembles, and plenty of squeaky practice sessions my family heroically endured. Improvising a solo taught me the same thing debugging did: listen carefully, stay patient, and trust that the next note will come.",
-        'home.gameHeading': 'Shoot Some Hoops',
-        'home.gameInstructions': 'Grab the ball, drag back like a slingshot, and let go. Every bucket makes the hoop move somewhere new — how long can you keep up?',
-        'home.sixersBlurb': "Trust the Process! I'm a die-hard Philadelphia 76ers fan — through the tanking years, the heartbreak playoff exits, and every Joel Embiid masterclass. Being a Sixers fan teaches you patience and loyalty, which turns out to be perfect training for watching long builds compile.",
+        'home.heroHeading': "Jeevithan Muhunthan",
+        'home.heroIntro': "A whimsical fellow who enjoys creating things. From hardware and software projects to making musical arrangements. Welcome to ma very own personal portfolio!!",
+        'home.saxBlurb': "I play the saxophone! I started in grade 9, with the tenor saxophone. After 3 years of playing in many ensemlbes and obliterating many more reeds, I now play the tenor, alto, and bari sax. See more on my music page!",
+        'home.gameHeading': 'Shoot Some Hoops ',
+        'home.gameInstructions': 'Grab the ball, drag back like a slingshot, and let her rip!',
+        'home.sixersBlurb': "This year they'll win it all no doubt.",
         'home.galleryHeading': 'Gallery',
 
         'about.heading': 'About Me',
         'about.paragraph1': "I'm Jeevithan, a developer and CS student passionate about building creative and functional digital experiences. I enjoy blending design and code.",
-        'about.paragraph2': "When I'm not coding, you'll find me playing basketball or listening to music.",
+        'about.paragraph2': "In my free time, you can find me playing basketball or listening to music.",
         'about.factsHeading': 'Fun Facts',
 
         'skills.heading': 'Skills',
@@ -35,7 +27,7 @@ window.SITE_CONTENT = {
         'education.heading': 'Education',
 
         'experience.heading': 'Experience',
-        'experience.hint': 'Click a note to pin it open — the string traces the path in order.',
+        'experience.hint': 'Click a note to pin it open',
 
         'projects.heading': 'Projects',
     },
@@ -72,17 +64,17 @@ window.SITE_CONTENT = {
     // ---------- EDUCATION PAGE ----------
     education: [
         {
-            degree: 'Bachelor of Science, Computer Science',
-            school: '[University Name]',
-            dates: '2023 – Present (Expected 2027)',
-            details: 'Relevant coursework: Algorithms, Data Structures, Web Development, Operating Systems',
+            degree: 'Calculus 3, individual course',
+            school: 'Athabasca University',
+            dates: 'FIX',
+            details: 'Enrolled in and completed the calculus 3 course at athabasca university, with a culminating mark of 80%',
             color: 'yellow',
         },
         {
-            degree: 'High School Diploma',
-            school: '[High School Name]',
-            dates: 'Graduated 2023',
-            details: '',
+            degree: 'Ontario Secondary School Diploma, International Baccalaureate Diploma',
+            school: 'Cameron Heights Secondary School',
+            dates: '2023-2027',
+            details: 'Highschool diploma and the full IB programme',
             color: 'cyan',
         },
     ],
@@ -140,6 +132,14 @@ window.SITE_CONTENT = {
             color: 'pink',
             body: "Taught skiing fundamentals to students of all levels, adapting lessons to each learner's pace while prioritizing safety.",
             tags: ['Coaching', 'Patience', 'Customer Service'],
+        },
+        {
+            date: 'March 2024 - Present',
+            title: 'Musician (Saxophone)',
+            org: 'Waterloo Reigonal Ceremonial Police Band',
+            color: 'pink',
+            body: "Busting out tunes with the band for local events and retirement homes.",
+            tags: ['Music'],
         },
     ],
 
